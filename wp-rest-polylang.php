@@ -2,10 +2,9 @@
 /**
  * Plugin Name: WP REST - Polylang
  * Description: Polylang integration for the WP REST API
- * Author: Marc-Antoine Ruel
- * Author URI: https://www.marcantoineruel.com
- * Version: 1.0.0
- * Plugin URI: https://github.com/maru3l/wp-rest-polylang
+ * Author: Daniel Butterworth
+ * Version: 1.0.3
+ * Plugin URI: https://github.com/danny-b-livesmart/wp-rest-polylang
  * License: gpl-3.0
  */
 
@@ -45,17 +44,17 @@ class WP_REST_polylang
 
 		foreach( $post_types as $post_type ) {
 			if (pll_is_translated_post_type( $post_type )) {
-				self::register_api_field($post_type);
+				self::$instance::register_api_field($post_type);
 			}
 		}
 	}
 
-	public function register_api_field($post_type) {
+	public static function register_api_field($post_type) {
 		register_rest_field(
 			$post_type,
 			"polylang_current_lang",
 			array(
-				"get_callback" => array( $this, "get_current_lang" ),
+				"get_callback" => array( self::$instance, "get_current_lang" ),
 				"schema" => null
 			)
 		);
@@ -64,7 +63,7 @@ class WP_REST_polylang
 			$post_type,
 			"polylang_translations",
 			array(
-				"get_callback" => array( $this, "get_translations"  ),
+				"get_callback" => array( self::$instance, "get_translations"  ),
 				"schema" => null
 			)
 		);
