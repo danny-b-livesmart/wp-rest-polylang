@@ -1,5 +1,5 @@
 {
   "name": "danny-b-livesmart/wp-rest-polylang",
   "description": "Adds value lang and translations to WP REST api response for each Post and Page request for site running the Polylang plugin.",
-  "type": "library"
+  "type": "wordpress-plugin"
 }
